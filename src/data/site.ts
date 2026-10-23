@@ -7,10 +7,9 @@ export const site = {
   bookingUrl: '',
   whatsappUrl: '',
   socials: { LinkedIn: '', YouTube: '', Instagram: '' },
-  portrait: '/images/anuj-speaking-1120.webp', // Background-edited version of the user-supplied photo
-  portraitSrcSet:
-    '/images/anuj-speaking-480.webp 480w, /images/anuj-speaking-800.webp 800w, /images/anuj-speaking-1120.webp 1120w',
-  portraitAlt: 'Anuj Yadav speaking into a handheld microphone',
+  portrait: '', // Use the original photograph only; no generative face or background edits.
+  portraitSrcSet: '',
+  portraitAlt: 'Anuj Yadav',
   speakerReelUrl: '', // Verified external video URL
   speakerKitUrl: '', // Real approved PDF in public/
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT || '',
