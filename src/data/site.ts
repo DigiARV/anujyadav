@@ -7,8 +7,10 @@ export const site = {
   bookingUrl: '',
   whatsappUrl: '',
   socials: { LinkedIn: '', YouTube: '', Instagram: '' },
-  portrait: '', // Approved image in public/, e.g. /images/anuj.webp
-  portraitAlt: 'Anuj Yadav',
+  portrait: '/images/anuj-speaking-1120.webp', // Background-edited version of the user-supplied photo
+  portraitSrcSet:
+    '/images/anuj-speaking-480.webp 480w, /images/anuj-speaking-800.webp 800w, /images/anuj-speaking-1120.webp 1120w',
+  portraitAlt: 'Anuj Yadav speaking into a handheld microphone',
   speakerReelUrl: '', // Verified external video URL
   speakerKitUrl: '', // Real approved PDF in public/
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT || '',

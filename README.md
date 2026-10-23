@@ -56,7 +56,7 @@ Empty values in `site.ts` are hidden. Only enter verified details:
 | `speakerKitUrl`             | Approved, accurate downloadable PDF              |
 | `privacyContact`            | Verified privacy enquiry email                   |
 
-Add an optimized WebP or AVIF portrait to `public/images/`, then set `portrait` to `/images/your-file.webp`. Prefer a 4:5 crop around 1000×1250 pixels; check both the desktop crop and wider mobile crop. The monogram is an intentional placeholder, never a synthetic likeness. Speaker footage and credentials remain clearly pending until real assets are supplied.
+Add an optimized WebP or AVIF portrait to `public/images/`, then set `portrait` to `/images/your-file.webp`. Prefer a 4:5 crop around 1000×1250 pixels; check both the desktop crop and wider mobile crop. The current portrait is an AI-assisted background edit and tighter framing of the photo supplied by Anuj, with responsive 480, 800, and 1120-pixel WebP versions. The original room background has been replaced with charcoal. The monogram remains only as a fallback when no portrait is configured. Speaker footage and credentials remain clearly pending until real assets are supplied.
 
 ## Form delivery
 
@@ -106,7 +106,7 @@ Tests start their own preview server. Default tests expect draft mode and no pro
 
 ## Needed before launch
 
-- Approved portrait, speaker/event footage, and any approved event photography.
+- Speaker/event footage and any additional approved event photography. The supplied portrait is now in place.
 - A verified professional biography and relevant credentials. No client logos, testimonials, awards, speaking history, or metrics are currently asserted.
 - Approval of service scope, proposed talk topics, formats, availability, and program directions. Programs are explicitly in development, with no dates or enrollment claims.
 - Editorial approval of the three starter resources and homepage positioning.

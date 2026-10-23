@@ -11,6 +11,9 @@ const { compact = false } = Astro.props;
     <img
       src={site.portrait}
       alt={site.portraitAlt}
+      srcset={site.portraitSrcSet || undefined}
+      sizes="(max-width: 700px) calc(100vw - 58px), (max-width: 999px) 42vw, 540px"
+      decoding="async"
       width="720"
       height="900"
       fetchpriority={compact ? 'auto' : 'high'}
