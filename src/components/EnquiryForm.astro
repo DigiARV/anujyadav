@@ -1,0 +1,278 @@
+---
+import Arrow from './Arrow.astro';
+import { site } from '../data/site';
+interface Props {
+  kind?: 'speaking' | 'training' | 'general';
+  interest?: string;
+}
+const { kind = 'general', interest = '' } = Astro.props;
+const connected = Boolean(site.formEndpoint);
+---
+
+<div class="enquiry-layout" id="enquire">
+  <div class="enquiry-intro">
+    <p class="eyebrow">YOUR NEXT STEP</p>
+    <h2>
+      {kind === 'speaking'
+        ? 'Bring a fresh perspective to your next event.'
+        : kind === 'training'
+          ? 'What would help your team move forward?'
+          : 'Let’s find a useful starting point.'}
+    </h2>
+    <p>Share a little context. The best place to begin is with what you want to make possible.</p>
+    <div class="form-note">
+      <span aria-hidden="true">
+        <Arrow />
+      </span>
+      <p>
+        {connected
+          ? 'Your details will be used to respond to this enquiry. Please avoid sharing confidential information.'
+          : 'Online delivery is not connected yet. You can prepare and download your enquiry below. Your details stay in this page and are not sent.'}
+      </p>
+    </div>
+  </div>
+  <form class="enquiry-form" data-endpoint={site.formEndpoint} data-kind={kind}>
+    <input type="hidden" name="enquiryType" value={kind} />
+    <div class="form-grid">
+      <label>
+        Your name <span>*</span>
+        <input name="name" autocomplete="name" required maxlength="120" placeholder="Full name" />
+      </label>
+      <label>
+        {kind === 'general' ? 'Email' : 'Work email'} <span>*</span>
+        <input
+          name="email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+          placeholder="you@organization.com"
+        />
+      </label>
+      <label class:list={{ full: kind === 'general' }}>
+        Organization {kind !== 'general' && <span>*</span>}
+        <input
+          name="organization"
+          autocomplete="organization"
+          required={kind !== 'general'}
+          maxlength="160"
+          placeholder="Your organization"
+        />
+      </label>
+      {kind === 'speaking' && (
+        <>
+          <label>
+            Event name <span>*</span>
+            <input name="eventName" required maxlength="160" placeholder="What’s the occasion?" />
+          </label>
+          <label>
+            Event date <span>*</span>
+            <input name="eventDate" type="date" required />
+          </label>
+          <label>
+            City / venue or virtual <span>*</span>
+            <input name="location" required maxlength="160" placeholder="City, venue, or virtual" />
+          </label>
+          <label>
+            Audience size <span>*</span>
+            <select name="audienceSize" required>
+              <option value="">Select a range</option>
+              <option>Under 50</option>
+              <option>50–200</option>
+              <option>201–500</option>
+              <option>Over 500</option>
+              <option>To be confirmed</option>
+            </select>
+          </label>
+          <label>
+            Session type <span>*</span>
+            <select name="sessionType" required>
+              <option value="">Select a format</option>
+              <option>Keynote</option>
+              <option>Fireside chat</option>
+              <option>Panel</option>
+              <option>Workshop</option>
+              <option>Corporate session</option>
+              <option>Let’s discuss</option>
+            </select>
+          </label>
+          <label>
+            Topic of interest <span>*</span>
+            <input
+              name="topic"
+              required
+              maxlength="180"
+              placeholder="The idea you want to explore"
+            />
+          </label>
+          <label>
+            Indicative budget <small>(optional)</small>
+            <input name="budget" maxlength="100" placeholder="Amount and currency, if known" />
+          </label>
+        </>
+      )}
+      {kind === 'training' && (
+        <>
+          <label>
+            Team size <span>*</span>
+            <input
+              name="teamSize"
+              type="number"
+              min="1"
+              max="1000000"
+              required
+              placeholder="Approximate number"
+            />
+          </label>
+          <label>
+            Delivery preference <span>*</span>
+            <select name="delivery" required>
+              <option value="">Select a format</option>
+              <option>In person</option>
+              <option>Virtual</option>
+              <option>Hybrid</option>
+              <option>Let’s discuss</option>
+            </select>
+          </label>
+          <label>
+            Preferred timing
+            <input name="timing" maxlength="160" placeholder="A date or timeframe" />
+          </label>
+        </>
+      )}
+      {kind === 'general' && (
+        <label class="full">
+          I’m interested in <span>*</span>
+          <select name="interest" required data-interest={interest}>
+            <option value="">Select an area</option>
+            {[
+              'Speaking',
+              'Corporate training',
+              'Business coaching',
+              'Leadership coaching',
+              'Personal branding',
+              'AI & digital education',
+              'Individual coaching',
+              'General enquiry',
+            ].map((value) => (
+              <option selected={value === interest}>{value}</option>
+            ))}
+          </select>
+        </label>
+      )}
+      <label class="full">
+        {kind === 'speaking' ? 'Additional information' : 'What would you like to work on?'}{' '}
+        <small>(optional)</small>
+        <textarea
+          name="message"
+          rows="4"
+          maxlength="4000"
+          placeholder="Your goals, context, or a question you’d like to explore."
+        ></textarea>
+      </label>
+    </div>
+    <div class="honey" aria-hidden="true">
+      <label>
+        Leave this blank
+        <input name="website" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+    <label class="consent">
+      <input type="checkbox" name="consent" required />
+      <span>
+        {connected
+          ? 'I agree to the use of these details to respond to my enquiry.'
+          : 'I understand this creates a local draft and does not send an enquiry.'}{' '}
+        Read the <a href="/privacy/">privacy notice</a>.
+      </span>
+    </label>
+    <button class="button" type="submit">
+      {connected ? 'Send enquiry' : 'Prepare enquiry draft'}{' '}
+      <span aria-hidden="true">
+        <Arrow />
+      </span>
+    </button>
+    <p class="required-note">
+      * Required fields. Session topics, format, and availability are confirmed individually.
+    </p>
+    <div class="form-result" role="status" aria-live="polite" tabindex="-1" hidden></div>
+    <noscript>
+      <p>Enable JavaScript to prepare or submit this form. No details have been sent.</p>
+    </noscript>
+  </form>
+</div>
+<script>
+  document.querySelectorAll<HTMLFormElement>('.enquiry-form').forEach((form) => {
+    const selector = form.querySelector<HTMLSelectElement>('[name="interest"]');
+    const requested = new URLSearchParams(location.search).get('interest');
+    if (selector && requested && Array.from(selector.options).some((o) => o.value === requested))
+      selector.value = requested;
+    const date = form.querySelector<HTMLInputElement>('[name="eventDate"]');
+    if (date) {
+      const now = new Date();
+      date.min = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    }
+    let downloadUrl: string | undefined;
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const values = Object.fromEntries(new FormData(form).entries());
+      if (values.website) return;
+      delete values.website;
+      const result = form.querySelector<HTMLElement>('.form-result')!;
+      const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+      result.hidden = false;
+      result.replaceChildren();
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        result.textContent =
+          'Your draft is ready. Nothing has been sent. Download it to keep a copy; delivery will be available once contact details are configured.';
+        if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+        const content =
+          'ENQUIRY DRAFT — NOT SENT\nAnuj Yadav / Anuj The Coach\n\n' +
+          Object.entries(values)
+            .map(([key, value]) => `${key}: ${value}`)
+            .join('\n');
+        downloadUrl = URL.createObjectURL(
+          new Blob([content], { type: 'text/plain;charset=utf-8' }),
+        );
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.download = 'anuj-enquiry-draft.txt';
+        link.className = 'text-link';
+        link.textContent = 'Download your enquiry draft ↓';
+        result.append(document.createElement('br'), link);
+        result.focus();
+        return;
+      }
+      button.disabled = true;
+      const original = Array.from(button.childNodes).map((node) => node.cloneNode(true));
+      button.textContent = 'Sending…';
+      result.textContent = 'Sending your enquiry…';
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 15000);
+      try {
+        if (new URL(endpoint).protocol !== 'https:') throw new Error('Invalid endpoint');
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(values),
+          signal: controller.signal,
+        });
+        const body = await response.json();
+        if (!response.ok || body.success !== true) throw new Error('Delivery not confirmed');
+        result.textContent =
+          'Thank you. Your enquiry has been received. We’ll use the details you shared to follow up.';
+        form.reset();
+      } catch {
+        result.textContent =
+          'We could not confirm delivery. Your details are still here. Please try again later; if you retry, mention that this may be a duplicate.';
+      } finally {
+        window.clearTimeout(timeout);
+        button.disabled = false;
+        button.replaceChildren(...original);
+        result.focus();
+      }
+    });
+  });
+</script>

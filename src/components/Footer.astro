@@ -1,0 +1,47 @@
+---
+import Arrow from './Arrow.astro';
+import { site } from '../data/site';
+---
+
+<footer class="site-footer container">
+  <div class="footer-top">
+    <a class="brand" href="/">
+      <span class="brand-mark">
+        ay<span>.</span>
+      </span>
+      <span class="brand-name">
+        ANUJ YADAV<small>ANUJ THE COACH</small>
+      </span>
+    </a>
+    <p>
+      Better questions.
+      <br />
+      Clearer thinking. Meaningful progress.
+    </p>
+    <div class="footer-links">
+      <a href="/speaking/">
+        Speaking <Arrow />
+      </a>
+      <a href="/corporate-training/">
+        Corporate training <Arrow />
+      </a>
+      <a href="/contact/">
+        Start a conversation <Arrow />
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© {new Date().getFullYear()} Anuj Yadav</span>
+    <div>
+      {Object.entries(site.socials)
+        .filter(([, url]) => url)
+        .map(([label, url]) => (
+          <a href={url} target="_blank" rel="noopener noreferrer">
+            {label} <Arrow />
+          </a>
+        ))}
+      <a href="/privacy/">Privacy</a>
+    </div>
+    <span>People first. Progress always.</span>
+  </div>
+</footer>

@@ -1,0 +1,31 @@
+---
+import Arrow from './Arrow.astro';
+interface Props {
+  title?: string;
+  description?: string;
+  href?: string;
+  label?: string;
+}
+const {
+  title = 'Good conversations start something.',
+  description = 'A keynote, a team workshop, or a question about your next move. Let’s explore what would be useful.',
+  href = '/contact/',
+  label = 'Start a conversation',
+} = Astro.props;
+---
+
+<section class="closing-cta">
+  <div class="container closing-inner">
+    <div>
+      <p class="eyebrow">LET’S MOVE FORWARD</p>
+      <h2>{title}</h2>
+      <p>{description}</p>
+    </div>
+    <a class="button button-light" href={href}>
+      {label}
+      <span aria-hidden="true">
+        <Arrow />
+      </span>
+    </a>
+  </div>
+</section>

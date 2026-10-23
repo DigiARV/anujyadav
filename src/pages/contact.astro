@@ -1,0 +1,72 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Layout from '../layouts/Layout.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title="Start a Conversation"
+  description="Contact Anuj Yadav about speaking, corporate training, coaching, consulting, or digital education. Share your context and explore the right next step."
+>
+  <section class="container page-hero">
+    <p class="eyebrow">CONTACT / LET’S CONNECT</p>
+    <h1>
+      Every next chapter
+      <br />
+      <em>starts somewhere.</em>
+    </h1>
+    <p class="lead">
+      An event to shape. A team to develop. A question to work through. Tell us what you have in
+      mind.
+    </p>
+  </section>
+  <section class="container contact-routes">
+    <a href="/speaking/#enquire">
+      <span class="eyebrow">FOR YOUR EVENT</span>
+      <h2>
+        Invite Anuj to speak <Arrow />
+      </h2>
+      <p>Share your event, audience, and topic.</p>
+    </a>
+    <a href="/corporate-training/#enquire">
+      <span class="eyebrow">FOR YOUR ORGANIZATION</span>
+      <h2>
+        Plan a team workshop <Arrow />
+      </h2>
+      <p>Let’s talk learning goals and context.</p>
+    </a>
+  </section>
+  <section class="container section">
+    <EnquiryForm />
+    <div class="contact-options">
+      {site.email && (
+        <a class="text-link" href={`mailto:${site.email}`}>
+          {site.email} <Arrow />
+        </a>
+      )}
+      {site.phone && (
+        <a class="text-link" href={`tel:${site.phone.replace(/[^+0-9]/g, '')}`}>
+          {site.phone}
+        </a>
+      )}
+      {site.bookingUrl && (
+        <a class="text-link" href={site.bookingUrl} target="_blank" rel="noopener noreferrer">
+          Book a conversation <Arrow />
+        </a>
+      )}
+      {site.whatsappUrl && (
+        <a class="text-link" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
+          WhatsApp <Arrow />
+        </a>
+      )}
+      {Object.entries(site.socials)
+        .filter(([, url]) => url)
+        .map(([name, url]) => (
+          <a class="text-link" href={url} target="_blank" rel="noopener noreferrer">
+            {name} <Arrow />
+          </a>
+        ))}
+    </div>
+  </section>
+</Layout>

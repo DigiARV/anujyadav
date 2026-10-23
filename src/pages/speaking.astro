@@ -1,0 +1,149 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Layout from '../layouts/Layout.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { site, services } from '../data/site';
+const topics = services[0].topics;
+---
+
+<Layout
+  title="Invite Anuj to Speak"
+  description="Plan a keynote, fireside chat, or corporate session with Anuj Yadav. Explore proposed topics in leadership, AI, business growth, and personal branding."
+>
+  <section class="speaker-hero">
+    <div class="container">
+      <p class="eyebrow">KEYNOTE SPEAKING / ANUJ YADAV</p>
+      <h1>
+        A fresh perspective.
+        <br />A room of possibilities.
+        <br />
+        <em>A meaningful next step.</em>
+      </h1>
+      <div class="speaker-hero-bottom">
+        <p>
+          Bring leadership, growth, and the changing world of work into focus. A conversation shaped
+          around your audience and what comes next for them.
+        </p>
+        <a class="button button-light" href="#enquire">
+          Invite Anuj to speak <Arrow />
+        </a>
+      </div>
+      <div class="speaker-line" aria-hidden="true">
+        <span>IDEA</span>
+        <i></i>
+        <span>CONVERSATION</span>
+        <i></i>
+        <span>
+          ACTION <Arrow />
+        </span>
+      </div>
+    </div>
+  </section>
+  <section class="section container intro-grid">
+    <p class="eyebrow">MORE THAN A MOMENT ON STAGE</p>
+    <div>
+      <h2>
+        Make the conversation
+        <br />
+        <em>relevant to the room.</em>
+      </h2>
+      <p class="prose">
+        Anuj brings together his work as a coach, trainer, entrepreneur, and educator to explore how
+        people and businesses grow. The starting point is your audience: their questions, context,
+        and ambitions.
+      </p>
+      <p class="prose">
+        For conferences, corporate events, leadership offsites, industry gatherings, and business
+        summits. Enquire to discuss fit, scope, and availability.
+      </p>
+    </div>
+  </section>
+  <section class="container section topics-section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">PROPOSED TOPIC DIRECTIONS</p>
+        <h2>
+          Big questions.
+          <br />
+          <em>Practical conversations.</em>
+        </h2>
+      </div>
+      <p>
+        Starting points for a tailored brief.
+        <br />
+        Topics are confirmed together.
+      </p>
+    </div>
+    <div class="topic-list">
+      {topics.map((topic, i) => (
+        <div>
+          <span>0{i + 1}</span>
+          <h3>{topic}</h3>
+          <span aria-hidden="true">
+            <Arrow />
+          </span>
+        </div>
+      ))}
+    </div>
+    <div class="two-columns speaking-extra">
+      <div>
+        <p class="eyebrow">DESIGNED TO HELP AUDIENCES</p>
+        <ul class="clean-list">
+          <li>See familiar challenges from a different angle.</li>
+          <li>Connect emerging ideas with their own work.</li>
+          <li>Leave with questions and next steps to explore.</li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">POSSIBLE FORMATS</p>
+        <p>Keynote · Fireside chat · Panel · Workshop · Corporate session</p>
+        <p class="micro">
+          Formats, duration, location, and availability are subject to confirmation. These are
+          proposed topics, not a record of past engagements.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="media-section">
+    <div class="container two-columns">
+      <div>
+        <p class="eyebrow">THE SPEAKER IN CONTEXT</p>
+        <h2>
+          A voice.
+          <br />
+          <em>A perspective.</em>
+        </h2>
+        <p>Explore the approach, then tell us about the room you’re bringing together.</p>
+        <a class="text-link" href="/about/">
+          More about Anuj <Arrow />
+        </a>
+        {site.speakerKitUrl && (
+          <p>
+            <a class="text-link" href={site.speakerKitUrl} download>
+              Download speaker profile ↓
+            </a>
+          </p>
+        )}
+      </div>
+      <div class="reel-placeholder">
+        {site.speakerReelUrl ? (
+          <a class="button" href={site.speakerReelUrl} target="_blank" rel="noopener noreferrer">
+            Watch the speaker reel <Arrow />
+          </a>
+        ) : (
+          <>
+            <span class="reel-symbol" aria-hidden="true">
+              <Arrow />
+            </span>
+            <h3>Speaker reel forthcoming.</h3>
+            <p>Approved event footage will appear here when available.</p>
+            <span class="eyebrow">REAL MOMENTS. WHEN READY.</span>
+          </>
+        )}
+      </div>
+    </div>
+  </section>
+  <section class="container section">
+    <EnquiryForm kind="speaking" />
+  </section>
+</Layout>

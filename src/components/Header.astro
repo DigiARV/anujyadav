@@ -1,0 +1,71 @@
+---
+import Arrow from './Arrow.astro';
+const path = Astro.url.pathname;
+const links = [
+  ['About', '/about/'],
+  ['Work together', '/services/'],
+  ['Speaking', '/speaking/'],
+  ['Insights', '/insights/'],
+  ['Contact', '/contact/'],
+];
+---
+
+<header class="site-header">
+  <a class="brand" href="/">
+    <span class="brand-mark" aria-hidden="true">
+      ay<span>.</span>
+    </span>
+    <span class="brand-name">
+      ANUJ YADAV <small>ANUJ THE COACH</small>
+    </span>
+  </a>
+  <button
+    class="menu-toggle"
+    aria-label="Open navigation"
+    aria-expanded="false"
+    aria-controls="main-navigation"
+  >
+    <span></span>
+    <span></span>
+  </button>
+  <nav id="main-navigation" aria-label="Main navigation">
+    {links.map(([label, href]) => (
+      <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>
+        {label}
+      </a>
+    ))}
+    <a class="button button-small" href="/speaking/#enquire">
+      Invite me to speak{' '}
+      <span aria-hidden="true">
+        <Arrow />
+      </span>
+    </a>
+  </nav>
+</header>
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = document.querySelector<HTMLElement>('#main-navigation');
+  function closeMenu() {
+    toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Open navigation');
+    nav?.classList.remove('open');
+  }
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+    nav?.classList.toggle('open', open);
+  });
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      closeMenu();
+      toggle.focus();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (e.target instanceof Node && !document.querySelector('.site-header')?.contains(e.target))
+      closeMenu();
+  });
+  matchMedia('(min-width: 1000px)').addEventListener('change', closeMenu);
+</script>

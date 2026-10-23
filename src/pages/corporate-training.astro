@@ -1,0 +1,94 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Layout from '../layouts/Layout.astro';
+import EnquiryForm from '../components/EnquiryForm.astro';
+import { services } from '../data/site';
+const service = services[1];
+---
+
+<Layout
+  title="Corporate Training & Workshops"
+  description="Explore customized workshops in leadership, communication, AI adoption, and digital marketing for your organization. Discuss your team’s learning needs."
+>
+  <section class="container page-hero">
+    <p class="eyebrow">CORPORATE TRAINING & WORKSHOPS</p>
+    <h1>
+      Learning that belongs
+      <br />
+      <em>in the everyday.</em>
+    </h1>
+    <p class="lead">
+      Help your team connect new skills to the work they actually do. Start with your context. Build
+      around useful practice.
+    </p>
+    <a class="button" href="#enquire">
+      Discuss your team’s needs <Arrow />
+    </a>
+  </section>
+  <section class="container section training-grid">
+    <div>
+      <p class="eyebrow">BUILD THE CAPABILITIES THAT MATTER</p>
+      <h2>
+        Better conversations.
+        <br />
+        Stronger teams.
+        <br />
+        <em>More intentional work.</em>
+      </h2>
+      <p>
+        For HR and L&D partners, people leaders, and growing organizations. Programs can be shaped
+        for emerging managers, experienced professionals, or cross-functional teams.
+      </p>
+    </div>
+    <div class="training-topics">
+      {service.topics.map((topic, i) => (
+        <div>
+          <span class="eyebrow">0{i + 1}</span>
+          <h3>{topic}</h3>
+        </div>
+      ))}
+    </div>
+  </section>
+  <section class="principles-section">
+    <div class="container section">
+      <p class="eyebrow">SHAPED AROUND YOUR ORGANIZATION</p>
+      <h2>
+        From a real need
+        <br />
+        <em>to a useful session.</em>
+      </h2>
+      <div class="three-columns">
+        {[
+          [
+            '01 / UNDERSTAND',
+            'Start with the context.',
+            'Discuss the team, the challenge, and the learning goals. Agree what a useful session should help people practise.',
+          ],
+          [
+            '02 / DESIGN',
+            'Build around participation.',
+            'Explore exercises, discussion, and relevant examples. Confirm the scope, format, and delivery requirements together.',
+          ],
+          [
+            '03 / APPLY',
+            'Connect learning to work.',
+            'Identify practical next steps and a way to reflect on them. Any follow-up support is agreed as part of the engagement.',
+          ],
+        ].map(([n, t, d]) => (
+          <div>
+            <p class="eyebrow">{n}</p>
+            <h3>{t}</h3>
+            <p>{d}</p>
+          </div>
+        ))}
+      </div>
+      <p class="delivery-note">
+        Possible delivery: in person, virtual, or hybrid. Workshops, team sessions, and customized
+        programs are subject to scope and availability.
+      </p>
+    </div>
+  </section>
+  <section class="container section">
+    <EnquiryForm kind="training" />
+  </section>
+</Layout>

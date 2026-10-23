@@ -1,0 +1,63 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+---
+
+<Layout
+  title="Privacy"
+  description="How this website handles enquiry details, local drafts, and your privacy."
+>
+  <article class="container reading-page">
+    <p class="eyebrow">PRIVACY NOTICE</p>
+    <h1>
+      Your details.
+      <br />
+      <em>Handled with care.</em>
+    </h1>
+    <div class="article-body">
+      <section>
+        <h2>What this site collects</h2>
+        <p>
+          Enquiry forms ask for contact details and context relevant to your request. Please do not
+          include sensitive or confidential information. Required fields are marked; other details
+          are optional.
+        </p>
+      </section>
+      <section>
+        <h2>Enquiry delivery</h2>
+        <p>
+          {site.formEndpoint
+            ? 'When you submit a form, the details you enter are sent to the configured enquiry service so your request can be handled. The form confirms receipt only when that service returns a successful response.'
+            : 'Online form delivery is not connected. Preparing a draft does not send your information to Anuj or store it on a server. The draft exists in the current browser page. If you choose to download it, a text file is saved to your device. Closing or refreshing the page clears the in-page draft.'}
+        </p>
+      </section>
+      <section>
+        <h2>Cookies and analytics</h2>
+        <p>
+          This site does not install analytics or advertising cookies. Hosting providers may process
+          technical request logs, such as IP addresses, for delivery and security. External websites
+          linked from this site have their own privacy practices.
+        </p>
+      </section>
+      <section>
+        <h2>Your choices</h2>
+        <p>
+          You can leave the form without submitting it and delete any downloaded draft from your
+          device. Details submitted through a future delivery service should be used to respond to
+          your request, not to subscribe you to marketing without a separate choice.
+        </p>
+        {site.privacyContact ? (
+          <p>
+            For privacy questions, contact{' '}
+            <a href={`mailto:${site.privacyContact}`}>{site.privacyContact}</a>.
+          </p>
+        ) : (
+          <p>
+            A verified privacy contact, service-provider details, and a retention period must be
+            supplied before live enquiry collection is enabled.
+          </p>
+        )}
+      </section>
+    </div>
+  </article>
+</Layout>

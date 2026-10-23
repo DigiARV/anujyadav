@@ -1,0 +1,87 @@
+---
+import Arrow from '../../components/Arrow.astro';
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import CTA from '../../components/CTA.astro';
+import { articles } from '../../data/articles';
+---
+
+<Layout
+  title="Insights & Resources"
+  description="Practical reading on AI, leadership, personal branding, and business growth. Explore ideas and frameworks to bring into your work."
+>
+  <section class="container page-hero">
+    <p class="eyebrow">THE NOTEBOOK / INSIGHTS & RESOURCES</p>
+    <h1>
+      Ideas worth
+      <br />
+      <em>working with.</em>
+    </h1>
+    <p class="lead">
+      A growing collection of perspectives, questions, and practical frameworks for people and
+      businesses in motion.
+    </p>
+  </section>
+  <section class="container section insights-section">
+    <div class="filter-bar" aria-label="Filter insights">
+      {[
+        'All',
+        'AI & digital',
+        'Leadership',
+        'Personal branding',
+        'Business growth',
+        'Digital marketing',
+        'Videos & tutorials',
+      ].map((category, i) => (
+        <button type="button" data-filter={category} aria-pressed={i === 0}>
+          {category}
+        </button>
+      ))}
+    </div>
+    <p class="filter-count micro" role="status" aria-live="polite">
+      3 resources
+    </p>
+    <div class="article-grid">
+      {articles.map((article, index) => (
+        <ArticleCard article={article} index={index} />
+      ))}
+    </div>
+    <div class="empty-state" hidden>
+      <h2>More perspectives are on the way.</h2>
+      <p>
+        No resources are published in this category yet. Explore another topic or share what you’d
+        like to learn.
+      </p>
+      <a class="text-link" href="/contact/">
+        Suggest a topic <Arrow />
+      </a>
+    </div>
+    <p class="editorial-note">
+      These introductory resources were prepared for this site. Videos, interviews, event footage,
+      and external publications will be added when verified media is available.
+    </p>
+  </section>
+  <CTA
+    title="What are you curious about?"
+    description="Bring the question into a workshop, a coaching conversation, or your next event."
+  />
+</Layout>
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  filters.forEach((button) =>
+    button.addEventListener('click', () => {
+      filters.forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+      let count = 0;
+      document.querySelectorAll<HTMLElement>('.article-card').forEach((card) => {
+        const show =
+          button.dataset.filter === 'All' || button.dataset.filter === card.dataset.category;
+        card.hidden = !show;
+        if (show) count++;
+      });
+      const empty = document.querySelector<HTMLElement>('.empty-state');
+      if (empty) empty.hidden = count > 0;
+      const counter = document.querySelector('.filter-count');
+      if (counter) counter.textContent = `${count} resource${count === 1 ? '' : 's'}`;
+    }),
+  );
+</script>

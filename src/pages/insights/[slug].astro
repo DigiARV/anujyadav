@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CTA from '../../components/CTA.astro';
+import { articles } from '../../data/articles';
+export function getStaticPaths() {
+  return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+const { article } = Astro.props;
+---
+
+<Layout title={article.title} description={article.excerpt} article>
+  <article class="container reading-page">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>/</span>
+      <a href="/insights/">Insights</a>
+      <span>/</span>
+      <span>{article.category}</span>
+    </nav>
+    <header>
+      <p class="eyebrow">
+        {article.category} / {article.type} / {article.read}
+      </p>
+      <h1>{article.title}</h1>
+      <p class="lead">{article.excerpt}</p>
+      <p class="article-byline">
+        From the Anuj The Coach notebook · Introductory editorial resource
+      </p>
+    </header>
+    <div class="article-body">
+      {article.sections.map(([heading, body]) => (
+        <section>
+          <h2>{heading}</h2>
+          <p>{body}</p>
+        </section>
+      ))}
+      <aside class="takeaway">
+        <p class="eyebrow">PUT IT INTO PRACTICE</p>
+        <p>{article.takeaway}</p>
+      </aside>
+      <a class="text-link" href="/insights/">
+        ← Back to all insights
+      </a>
+    </div>
+  </article>
+  <CTA
+    title="Bring the idea into your work."
+    description="Explore a conversation or workshop shaped around your context."
+  />
+</Layout>

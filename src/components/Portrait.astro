@@ -1,0 +1,40 @@
+---
+import { site } from '../data/site';
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<div class:list={['portrait', { compact }]}>
+  {site.portrait ? (
+    <img
+      src={site.portrait}
+      alt={site.portraitAlt}
+      width="720"
+      height="900"
+      fetchpriority={compact ? 'auto' : 'high'}
+      loading={compact ? 'lazy' : 'eager'}
+    />
+  ) : (
+    <div
+      class="portrait-art"
+      role="img"
+      aria-label="Abstract monogram placeholder. An approved portrait of Anuj Yadav will be added here."
+    >
+      <span class="portrait-ring"></span>
+      <span class="portrait-monogram">
+        ay<span>.</span>
+      </span>
+      <span class="portrait-note">
+        A PERSONAL PERSPECTIVE.
+        <br />A PRACTICAL WAY FORWARD.
+      </span>
+      <span class="placeholder-label">PORTRAIT FORTHCOMING</span>
+    </div>
+  )}
+  <div class="portrait-caption">
+    <span>Anuj Yadav</span>
+    <span>Coach. Speaker. Entrepreneur.</span>
+  </div>
+</div>

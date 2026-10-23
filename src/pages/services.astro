@@ -1,0 +1,76 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+import { services } from '../data/site';
+const destinations: Record<string, string> = {
+  speaking: '/speaking/',
+  'corporate-training': '/corporate-training/',
+  'business-coaching': '/coaching/#business',
+  'leadership-coaching': '/coaching/#leadership',
+  education: '/education/',
+  'personal-branding': '/contact/?interest=Personal%20branding#enquire',
+  'individual-coaching': '/contact/?interest=Individual%20coaching#enquire',
+};
+---
+
+<Layout
+  title="Work with Anuj"
+  description="Explore keynote speaking, corporate workshops, business coaching, leadership development, personal branding, and AI education with Anuj Yadav."
+>
+  <section class="container page-hero">
+    <p class="eyebrow">WORK WITH ANUJ</p>
+    <h1>
+      Your ambition.
+      <br />
+      <em>A practical way forward.</em>
+    </h1>
+    <p class="lead">
+      Start with the challenge, not the service. Together, we can explore the right conversation,
+      learning experience, or engagement for you.
+    </p>
+  </section>
+  <div class="container service-jump" aria-label="Service categories">
+    {services.map((s) => (
+      <a href={`#${s.slug}`}>
+        {s.title} <Arrow down />
+      </a>
+    ))}
+  </div>
+  <section class="container service-details">
+    {services.map((s, i) => (
+      <article id={s.slug} class:list={['service-detail', { 'service-priority': i < 2 }]}>
+        <div>
+          <span class="eyebrow">
+            {s.number} / {s.title}
+          </span>
+          <h2>{s.short}</h2>
+          <p>{s.description}</p>
+          <a class="button" href={destinations[s.slug]}>
+            {s.cta} <Arrow />
+          </a>
+        </div>
+        <div>
+          <p class="eyebrow">A GOOD FIT FOR</p>
+          <p>{s.audience}</p>
+          <p class="eyebrow">WAYS TO WORK</p>
+          <p>{s.formats}</p>
+          <details>
+            <summary>
+              Explore focus areas <span aria-hidden="true">+</span>
+            </summary>
+            <ul>
+              {s.topics.map((t) => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          </details>
+        </div>
+      </article>
+    ))}
+  </section>
+  <CTA
+    title="Not sure where to begin?"
+    description="Share what you’re working through. We can start there."
+  />
+</Layout>

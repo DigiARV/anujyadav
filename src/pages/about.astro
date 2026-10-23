@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Portrait from '../components/Portrait.astro';
+import CTA from '../components/CTA.astro';
+---
+
+<Layout
+  title="About Anuj"
+  description="Meet Anuj Yadav: coach, trainer, entrepreneur, speaker, and educator connecting business strategy, leadership, and practical learning."
+>
+  <section class="container page-hero about-hero">
+    <div>
+      <p class="eyebrow">ABOUT ANUJ / THE PERSON BEHIND THE WORK</p>
+      <h1>
+        Different disciplines.
+        <br />
+        <em>One human thread.</em>
+      </h1>
+      <p class="lead">
+        Business gets better when people grow. People grow when they have the clarity, skills, and
+        space to take their next step.
+      </p>
+    </div>
+    <Portrait compact />
+  </section>
+  <section class="container section intro-grid">
+    <p class="eyebrow">A CONNECTED PERSPECTIVE</p>
+    <div>
+      <h2>
+        Strategy meets learning.
+        <br />
+        <em>Learning meets action.</em>
+      </h2>
+      <p class="prose">
+        Anuj Yadav is a coach, trainer, entrepreneur, motivational speaker, and educator. His work
+        spans business growth, leadership, personal development, digital marketing, AI, and personal
+        branding.
+      </p>
+      <p class="prose">
+        These disciplines share a common question: how can an idea become something useful in
+        someone’s work or life? Anuj The Coach brings that question into speaking, workshops,
+        coaching, and education.
+      </p>
+      <p class="prose">
+        The approach starts with context: where you are, what matters to you, and what is getting in
+        the way. From there, the focus is on clearer thinking and practical next steps.
+      </p>
+    </div>
+  </section>
+  <section class="principles-section">
+    <div class="container section">
+      <p class="eyebrow">THE APPROACH</p>
+      <h2>
+        Grounded in people.
+        <br />
+        <em>Oriented toward progress.</em>
+      </h2>
+      <div class="three-columns">
+        {[
+          [
+            '01',
+            'Clarity before complexity.',
+            'Make the question useful before making the answer elaborate. Start with what matters most.',
+          ],
+          [
+            '02',
+            'Practical beats abstract.',
+            'Connect ideas to decisions, conversations, and actions people can use in their own context.',
+          ],
+          [
+            '03',
+            'Stay open. Keep learning.',
+            'Technology changes. People and businesses evolve. Curiosity belongs in the work.',
+          ],
+        ].map(([num, title, text]) => (
+          <div>
+            <span class="eyebrow">{num}</span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="container section">
+    <div class="section-heading">
+      <h2>
+        The ventures
+        <br />
+        <em>behind the perspective.</em>
+      </h2>
+      <p>Related work. A shared focus on growth.</p>
+    </div>
+    <div class="two-columns">
+      <div class="editorial-panel">
+        <p class="eyebrow">DIGITAL & BUSINESS</p>
+        <h3>DigiARV</h3>
+        <p>Digital marketing, AI-enabled business solutions, and digital education.</p>
+      </div>
+      <div class="editorial-panel">
+        <p class="eyebrow">PEOPLE & DEVELOPMENT</p>
+        <h3>NourishNudge</h3>
+        <p>Coaching, training, soft skills, communication, and professional development.</p>
+      </div>
+    </div>
+    <aside class="editorial-note">
+      <strong>A profile in progress.</strong> A detailed professional biography, approved
+      photography, and verified experience will be added here. No client history, qualifications, or
+      awards are implied.
+    </aside>
+  </section>
+  <CTA />
+</Layout>

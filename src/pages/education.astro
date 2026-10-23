@@ -1,0 +1,95 @@
+---
+import Arrow from '../components/Arrow.astro';
+import Layout from '../layouts/Layout.astro';
+import CTA from '../components/CTA.astro';
+import { programs } from '../data/site';
+---
+
+<Layout
+  title="AI & Digital Education"
+  description="Practical learning in AI, digital marketing, and personal branding. Explore proposed workshops and register your interest in future learning opportunities."
+>
+  <section class="container page-hero">
+    <p class="eyebrow">AI & DIGITAL EDUCATION</p>
+    <h1>
+      A changing world.
+      <br />
+      <em>A curious mind.</em>
+    </h1>
+    <p class="lead">
+      Understand the tools. Ask better questions. Build skills that help you do useful work in a
+      digital world.
+    </p>
+    <a class="button" href="/contact/?interest=AI%20%26%20digital%20education#enquire">
+      Express interest in learning <Arrow />
+    </a>
+  </section>
+  <section class="container section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">LEARNING DIRECTIONS</p>
+        <h2>
+          Practical by design.
+          <br />
+          <em>Open to possibility.</em>
+        </h2>
+      </div>
+      <p>
+        For professionals, entrepreneurs,
+        <br />
+        teams, and curious learners.
+      </p>
+    </div>
+    <div class="program-list">
+      {programs.map((program, i) => (
+        <article class="program">
+          <span class="eyebrow">
+            0{i + 1} / {program.theme}
+          </span>
+          <h3>{program.title}</h3>
+          <p>{program.description}</p>
+          <span class="program-status">IN DEVELOPMENT · NO DATES ANNOUNCED</span>
+          <a class="text-link" href="/contact/?interest=AI%20%26%20digital%20education#enquire">
+            Tell us what you’d like to learn <Arrow />
+          </a>
+        </article>
+      ))}
+    </div>
+    <aside class="editorial-note">
+      These are proposed learning directions, not open courses. Schedules, delivery format,
+      curriculum, and fees will be published only when confirmed. An enquiry does not reserve a
+      place or enroll you in a program.
+    </aside>
+  </section>
+  <section class="principles-section">
+    <div class="container section two-columns">
+      <div>
+        <p class="eyebrow">LEARNING FOR YOUR TEAM</p>
+        <h2>
+          Make it relevant
+          <br />
+          <em>to your work.</em>
+        </h2>
+      </div>
+      <div>
+        <p class="lead">
+          Looking for a focused session on AI awareness, productivity, digital marketing, or
+          professional visibility?
+        </p>
+        <p>
+          A customized workshop can start with your team’s questions and existing level of
+          familiarity.
+        </p>
+        <a class="text-link" href="/corporate-training/#enquire">
+          Discuss a team workshop <Arrow />
+        </a>
+      </div>
+    </div>
+  </section>
+  <CTA
+    title="Stay curious. Start a conversation."
+    description="Tell us the skills you want to build and the format that would work for you."
+    href="/contact/?interest=AI%20%26%20digital%20education#enquire"
+    label="Express your interest"
+  />
+</Layout>
